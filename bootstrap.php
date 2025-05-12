@@ -1,0 +1,27 @@
+<?php
+//bootstrap.php
+useDoctrine\DBAL\DriverManager;
+useDoctrine\ORM\EntityManager;
+useDoctrine\ORM\ORMSetup;
+
+require_once "vendor/autoload.php";
+//Create a simple "default" Doctrine ORM configuration for Attributes
+
+$config =ORMSetup::createAttributeMetadataConfiguration(
+    paths:array(__DIR__."/src"),
+    isDevMode: true,
+);
+//or if you prefer XML
+//$config=ORMSetup::createXMLMetadataConfiguration(
+// paths:array(__DIR__."/config/xml"),
+// isDevMode:true,
+//);
+
+//configuringthe databaseconnection
+$connection =DriverManager::getConnection([
+    'driver' => 'pdo_sqlite',
+    'path' =>__DIR__. '/db.sqlite',
+],$config);
+
+//obtaining the entity manager
+$entityManager =new EntityManager($connection,$config);
