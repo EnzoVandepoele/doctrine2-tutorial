@@ -2,11 +2,21 @@
 // src/Bug.php
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bugs')]
+
 class Bug
 {
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
@@ -44,7 +54,7 @@ class Bug
     public function setStatus($status): void {
         $this->status = $status;
     }
-    
+
     public function getStatus():string {
         return $this->status;
     }
