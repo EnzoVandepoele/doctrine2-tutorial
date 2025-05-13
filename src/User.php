@@ -2,7 +2,7 @@
 //src/User.php
 
 use Doctrine\ORM\Mapping as ORM;
- use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
@@ -15,6 +15,15 @@ class User
     {
         $this->reportedBugs = new ArrayCollection();
         $this->assignedBugs = new ArrayCollection();
+    }
+
+    public function addReportedBug(Bug $bug): void
+    {
+        $this->reportedBugs[] = $bug;
+    }
+    public function assignedToBug(Bug $bug): void
+    {
+        $this->assignedBugs[] = $bug;
     }
 
     /**@var int*/
@@ -39,6 +48,6 @@ class User
 
     public function setName(string $name):void
     {
-        $this->name =$name;
+        $this->name=$name;
     }
 }
