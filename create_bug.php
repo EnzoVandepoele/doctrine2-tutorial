@@ -9,7 +9,7 @@ $productIds=explode(",", $argv[3]);
 $reporter=$entityManager->find("User", $reporterId);
 $engineer=$entityManager->find("User", $engineerId);
 if(!$reporter||!$engineer){
-    echo "Noreporter and/orengineer foundfor thegivenid(s).\n";
+    echo "Noreporter and/orengineer found for the given id(s).\n";
     exit(1);
 }
 
@@ -19,7 +19,7 @@ $bug->setCreated(new DateTime("now"));
 $bug->setStatus("OPEN");
 
 foreach ($productIds as $productId){
-    $product =$entityManager->find("Product", $productId);
+    $product=$entityManager->find("Product", $productId);
     $bug->assignToProduct($product);
 }
 
